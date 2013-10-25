@@ -1,5 +1,7 @@
 package com.example.loadertutorial.loader;
 
+import java.util.concurrent.TimeUnit;
+
 import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;
 import android.util.Log;
@@ -7,6 +9,8 @@ import android.util.Log;
 public class MyAsyncLoader extends AsyncTaskLoader<Integer> {
 
 	public static final String TAG = "My Async Loader";
+
+	private Integer result;
 
 	public MyAsyncLoader(Context context) {
 		super(context);
@@ -19,7 +23,15 @@ public class MyAsyncLoader extends AsyncTaskLoader<Integer> {
 	@Override
 	public Integer loadInBackground() {
 		Log.d(TAG, "loadInBackground(). Start loading");
-		return null;
+		try {
+			for (int i = 0; i < 25; i++) {
+				TimeUnit.SECONDS.sleep(1);
+				Log.d(TAG, "Loading....." + i);
+			}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		return 5;
 	}
 
 	@Override
@@ -40,10 +52,16 @@ public class MyAsyncLoader extends AsyncTaskLoader<Integer> {
 		super.onReset();
 	}
 
+	// workaround a bug, when loader can`t start
 	@Override
 	protected void onStartLoading() {
 		Log.d(TAG, "onStartLoading()");
-		super.onStartLoading();
+		if (result != null) {
+			deliverResult(result);
+		}
+		if (takeContentChanged() || result == null) {
+			forceLoad();
+		}
 	}
 
 	@Override

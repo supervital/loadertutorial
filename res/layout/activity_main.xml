@@ -25,4 +25,19 @@
         android:onClick="onMainScreen"
         android:text="@string/loader_activity" />
 
+    <Button
+        android:id="@+id/loaderFragmentBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/loaderActivityBtn"
+        android:layout_centerHorizontal="true"
+        android:onClick="onMainScreen"
+        android:text="@string/loader_fragment" />
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+    </FrameLayout>
+
 </RelativeLayout>

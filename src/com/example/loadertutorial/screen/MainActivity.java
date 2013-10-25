@@ -1,14 +1,16 @@
 package com.example.loadertutorial.screen;
 
-import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 
 import com.example.loadertutorial.R;
+import com.example.loadertutorial.screen.fragment.LoaderFragment;
 
-public class MainActivity extends Activity {
+public class MainActivity extends FragmentActivity {
 
 	public static final String TAG = "Main Activity";
 
@@ -29,6 +31,12 @@ public class MainActivity extends Activity {
 		switch (button.getId()) {
 		case R.id.loaderActivityBtn:
 			Log.d(TAG, "Start loader activity");
+			startActivity(new Intent(MainActivity.this, LoaderActivity.class));
+			break;
+
+		case R.id.loaderFragmentBtn:
+			getSupportFragmentManager().beginTransaction()
+					.add(R.id.container, new LoaderFragment()).commit();
 			break;
 
 		default:
