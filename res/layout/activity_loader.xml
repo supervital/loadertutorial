@@ -9,11 +9,13 @@
     android:paddingTop="@dimen/activity_vertical_margin" >
 
     <TextView
-        android:id="@+id/textField"
+        android:id="@+id/loaderValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:visibility="invisible" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="18sp"
+        android:visibility="visible" />
 
     <ProgressBar
         android:id="@+id/progressBarActivity"
@@ -25,20 +27,20 @@
         android:visibility="invisible" />
 
     <Button
-        android:id="@+id/startLoaderBtn"
+        android:id="@+id/resetLoaderBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/startAsyncLoaderBtn"
+        android:layout_below="@+id/startLoaderBtn"
         android:layout_centerHorizontal="true"
         android:onClick="onLoaderActivityScreen"
-        android:text="@string/start_loader" />
+        android:text="@string/reset_loader" />
 
     <Button
-        android:id="@+id/startAsyncLoaderBtn"
+        android:id="@+id/startLoaderBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:onClick="onLoaderActivityScreen"
-        android:text="@string/start_async_loader" />
+        android:text="@string/start_loader" />
 
 </RelativeLayout>

@@ -6,7 +6,7 @@
     <string name="hello_loaders">Hello Loaders!</string>
     <string name="loader_activity">Loader Activity</string>
     <string name="loader_fragment">Loader Fragment</string>
-    <string name="start_loader">Start loader</string>
-    <string name="start_async_loader">Start Async Loader</string>
+    <string name="reset_loader">Reset Loader</string>
+    <string name="start_loader">Start Loader</string>
 
 </resources>

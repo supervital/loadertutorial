@@ -24,14 +24,15 @@ public class MyAsyncLoader extends AsyncTaskLoader<Integer> {
 	public Integer loadInBackground() {
 		Log.d(TAG, "loadInBackground(). Start loading");
 		try {
-			for (int i = 0; i < 25; i++) {
+			for (int i = 0; i < 15; i++) {
 				TimeUnit.SECONDS.sleep(1);
-				Log.d(TAG, "Loading....." + i);
+				Log.d(TAG, "Loading..... " + i);
+				result = i;
 			}
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		return 5;
+		return result;
 	}
 
 	@Override
@@ -52,7 +53,6 @@ public class MyAsyncLoader extends AsyncTaskLoader<Integer> {
 		super.onReset();
 	}
 
-	// workaround a bug, when loader can`t start
 	@Override
 	protected void onStartLoading() {
 		Log.d(TAG, "onStartLoading()");

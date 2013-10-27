@@ -8,60 +8,57 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.example.loadertutorial.R;
 import com.example.loadertutorial.loader.MyAsyncLoader;
-import com.example.loadertutorial.loader.MyLoader;
 
 public class LoaderActivity extends FragmentActivity implements
 		LoaderCallbacks<Integer> {
 
 	private static final String TAG = "Loader Activity";
-	private static final int LOADER_ID = 1;
-	private static final int ASYNC_LOADER_ID = 2;
+	private static final int ASYNC_LOADER_ID = 1;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_loader);
-
 		if (getSupportLoaderManager().getLoader(ASYNC_LOADER_ID) != null) {
 			Log.d(TAG, "Reconnecting with existing Loader id");
-			startAsyncLoader();
+			getSupportLoaderManager().initLoader(ASYNC_LOADER_ID, null, this);
+			showProgress();
 		}
+
 	}
 
 	@Override
 	public Loader<Integer> onCreateLoader(int id, Bundle args) {
 		Log.d(TAG, "onCreateLoader. Id is " + Integer.toString(id));
+		showProgress();
 		switch (id) {
-		case LOADER_ID:
-			return new MyLoader(LoaderActivity.this);
-
 		case ASYNC_LOADER_ID:
 			return new MyAsyncLoader(LoaderActivity.this);
 
 		default:
 			return null;
 		}
+
 	}
 
 	@Override
 	public void onLoadFinished(Loader<Integer> loader, Integer data) {
 		Log.d(TAG, "onLoadFinished. Id is " + loader.getId());
 		switch (loader.getId()) {
-		case LOADER_ID:
-			break;
-
 		case ASYNC_LOADER_ID:
+			Log.d(TAG, "Load is finished. Value is " + Integer.toString(data));
+			((TextView) findViewById(R.id.loaderValue)).setText(Integer
+					.toString(data));
 			break;
 
 		default:
 			break;
 		}
-
 		hideProgress();
-
 	}
 
 	@Override
@@ -73,14 +70,14 @@ public class LoaderActivity extends FragmentActivity implements
 	public void onLoaderActivityScreen(View button) {
 		switch (button.getId()) {
 		case R.id.startLoaderBtn:
-			Log.d(TAG, "Init Loader");
-			getSupportLoaderManager().initLoader(LOADER_ID, null, this);
-			showProgress();
+			Log.d(TAG, "Start Loader Button");
+			getSupportLoaderManager().initLoader(ASYNC_LOADER_ID, null, this);
 			break;
 
-		case R.id.startAsyncLoaderBtn:
-			Log.d(TAG, "Init Async Loader");
-			startAsyncLoader();
+		case R.id.resetLoaderBtn:
+			Log.d(TAG, "Reset Loader Button");
+			getSupportLoaderManager()
+					.restartLoader(ASYNC_LOADER_ID, null, this);
 			break;
 
 		default:
@@ -88,17 +85,12 @@ public class LoaderActivity extends FragmentActivity implements
 		}
 	}
 
-	private void startAsyncLoader() {
-		getSupportLoaderManager().initLoader(ASYNC_LOADER_ID, null, this);
-		showProgress();
-	}
-
 	private void hideProgress() {
 		((ProgressBar) findViewById(R.id.progressBarActivity))
 				.setVisibility(View.INVISIBLE);
 		((Button) findViewById(R.id.startLoaderBtn))
 				.setVisibility(View.VISIBLE);
-		((Button) findViewById(R.id.startAsyncLoaderBtn))
+		((Button) findViewById(R.id.resetLoaderBtn))
 				.setVisibility(View.VISIBLE);
 	}
 
@@ -107,7 +99,7 @@ public class LoaderActivity extends FragmentActivity implements
 				.setVisibility(View.VISIBLE);
 		((Button) findViewById(R.id.startLoaderBtn))
 				.setVisibility(View.INVISIBLE);
-		((Button) findViewById(R.id.startAsyncLoaderBtn))
+		((Button) findViewById(R.id.resetLoaderBtn))
 				.setVisibility(View.INVISIBLE);
 	}
 
