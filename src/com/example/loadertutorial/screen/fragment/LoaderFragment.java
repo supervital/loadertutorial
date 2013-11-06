@@ -69,7 +69,7 @@ public class LoaderFragment extends Fragment implements
 	@Override
 	public Loader<Integer> onCreateLoader(int id, Bundle args) {
 		Log.d(TAG, "onCreateLoader. Id is " + Integer.toString(id));
-		showProgress();
+//		showProgress();
 		switch (id) {
 		case ASYNC_LOADER_ID:
 			return new MyAsyncLoader(getActivity());

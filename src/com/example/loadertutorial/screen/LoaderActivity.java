@@ -70,12 +70,13 @@ public class LoaderActivity extends FragmentActivity implements
 	public void onLoaderActivityScreen(View button) {
 		switch (button.getId()) {
 		case R.id.startLoaderBtn:
-			Log.d(TAG, "Start Loader Button");
+			Log.d(TAG, "Start Loader");
 			getSupportLoaderManager().initLoader(ASYNC_LOADER_ID, null, this);
 			break;
 
 		case R.id.resetLoaderBtn:
-			Log.d(TAG, "Reset Loader Button");
+			Log.d(TAG, "Reset Loader");
+			((TextView) findViewById(R.id.loaderValue)).setText("");
 			getSupportLoaderManager()
 					.restartLoader(ASYNC_LOADER_ID, null, this);
 			break;

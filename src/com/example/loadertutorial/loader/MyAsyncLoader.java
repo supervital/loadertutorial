@@ -70,4 +70,28 @@ public class MyAsyncLoader extends AsyncTaskLoader<Integer> {
 		super.onStopLoading();
 	}
 
+	@Override
+	protected Integer onLoadInBackground() {
+		Log.d(TAG, "onLoadInBackground()");
+		return super.onLoadInBackground();
+	}
+
+	@Override
+	public void abandon() {
+		Log.d(TAG, "abandon()");
+		super.abandon();
+	}
+
+	@Override
+	public void forceLoad() {
+		Log.d(TAG, "forceLoad()");
+		super.forceLoad();
+	}
+
+	@Override
+	protected void onAbandon() {
+		Log.d(TAG, "onAbandon()");
+		super.onAbandon();
+	}
+
 }
